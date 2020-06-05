@@ -216,10 +216,13 @@ byobu new window `F2`, you can have a lot of them
 - DB folder  
   `cd /home/ubuntu/.gecko/db/denali/v0.5.0`  
   `watch ls -al`
+- size of DB folder  
+  `watch du -hs ~/.gecko/db/denali/v0.5.0/`
 - ava process  
   `ps -aux | grep ava` 
   row three is %CPU, row four %MEM
 
+In the `~/.gecko` folder lives a lot of "personal" gecko stuff.
 
 ## TODOS:
 
