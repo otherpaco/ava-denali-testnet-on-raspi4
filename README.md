@@ -58,6 +58,8 @@ zsh top shell
 ohmyzsh top config for zsh  
 byobu good shell if you use ssh as it runs even when you disconnect
 
+from her on I ALWAYS start byobu in my shell so when I get disconnected the process keeps om running and when I come back and type byobu I am where I left, except for reboots of the Pi.
+
 ## GECKO
 
 I follow mostly this one  
@@ -68,6 +70,8 @@ https://medium.com/@nitaxmx/ava-testnet-validator-in-raspberry-pi-59bd16b59d64
 
 from here on https://github.com/ava-labs/gecko#installation
 
+GOPATH
+
 - mkdir go
 - GOPATH should already be set https://github.com/golang/go/wiki/SettingGOPATH but somehow is not
 - echo $GOPATH shows blank
@@ -76,7 +80,13 @@ from here on https://github.com/ava-labs/gecko#installation
 - echo $GOPATH /home/ubuntu/go
 - same for .zshrc you need to be in zsh at least for the source command
 
+GECKO
 
+- go get -v -d github.com/ava-labs/gecko/...
+- cd $GOPATH/src/github.com/ava-labs/gecko
+- ./scripts/build.sh
+
+DO IT IN BYOBU just in case you loose ssh connection!!
 
 
 
