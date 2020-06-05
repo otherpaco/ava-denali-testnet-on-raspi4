@@ -134,7 +134,7 @@ curl -X POST --data '{
 
 response {"jsonrpc":"2.0","result":{"success":true},"id":1}
 
-### NOW WE WAIT AND GET FRUSTRADED - DON'T ... GET FRUSTRADED BUT BE PATIENT
+### NOW WE WAIT AND GET FRUSTRATED - DON'T ... GET FRUSTRATED BUT BE PATIENT
 
 "BOOTSTRAPPING" it is all over the Discord Channel and it sucks, a bit as it takes some time ...  
 What you will see after you entered `./ava`  
@@ -202,6 +202,8 @@ then a lot of this
 2020-06-05T20:38:02.750Z [DEBUG] plugin.sh: DEBUG[06-05|20:38:02.750] FS scan times                            list=153.109µs  set=2.13µs   diff=2.278µs
 ...
 ```
+
+At the moment the CPU has ~61°C, caselees at the moment. How do I know? Read more...
 
 ### MONITOR
 
