@@ -66,6 +66,19 @@ https://medium.com/@nitaxmx/ava-testnet-validator-in-raspberry-pi-59bd16b59d64
 - sudo apt install golang
 - go version should show go1.13.x or higher
 
+from here on https://github.com/ava-labs/gecko#installation
+
+- mkdir go
+- GOPATH should already be set https://github.com/golang/go/wiki/SettingGOPATH but somehow is not
+- echo $GOPATH shows blank
+- nano .bashrc add "export GOPATH=$HOME/go" and empy line at end of file you need to be in the bash
+- source .bashrc
+- echo $GOPATH /home/ubuntu/go
+- same for .zshrc you need to be in zsh at least for the source command
+
+
+
+
 
 
 
