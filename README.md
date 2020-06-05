@@ -88,7 +88,15 @@ GECKO
 
 DO IT IN BYOBU just in case you loose ssh connection!!
 
+MONITOR TEMPERATURE
 
+cat /sys/class/thermal/thermal_zone0/temp
+
+gives you the CPU temp, divide it by 1000 and you have degrees Celsius
+
+watch cat /sys/class/thermal/thermal_zone0/temp
+
+refreshes the value every 2 seconds Strg + c exits
 
 
 
