@@ -36,3 +36,14 @@ Ubuntu 20.04 LTS 64-bit for RasPi4
 - wait for ubuntu to self update a bit then
 - sudo apt update
 - sudo apt full-upgrade
+
+add some extra GB Memory aka swap
+
+from here https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04
+
+- sudo fallocate -l 16G /swapfile
+- sudo chmod 600 /swapfile
+- sudo mkswap /swapfile
+- sudo swapon /swapfile
+- sudo cp /etc/fstab /etc/fstab.bak (just in case)
+- you can work on swapinees etc
