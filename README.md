@@ -134,9 +134,92 @@ curl -X POST --data '{
 
 response {"jsonrpc":"2.0","result":{"success":true},"id":1}
 
+### NOW WE WAIT AND GET FRUSTRADED - DON'T ... GET FRUSTRADED BUT BE PATIENT
+
+"BOOTSTRAPPING" it is all over the Discord Channel and it sucks, a bit as it takes some time ...  
+What you will see after you entered `./ava`  
+Some ASCII-Art and then:
+
+```sh
+WARN [06-05|19:20:35] /main/main.go#44: NAT traversal has failed. If this node becomes a staker, it may lose its reward due to being unreachable.
+WARN [06-05|19:20:35] /main/main.go#65: assertions are enabled. This may slow down execution
+...
+INFO [06-05|19:20:35] /api/server.go#105: adding route /ext/admin
+INFO [06-05|19:20:35] /node/node.go#475: initializing Health API
+INFO [06-05|19:20:35] /api/server.go#105: adding route /ext/health
+INFO [06-05|19:20:35] /chains/manager.go#187: creating chain:
+INFO [06-05|19:20:35] <chain 11111111111111111111111111111111LpoYY> /vms/platformvm/vm.go#695: next scheduled event is at 2020-10-31 00:00:00 +0000 UTC (3532h39m24.274439418s in the future)
+```
+Ignore both warnings for the time beeing https://docs.ava.network/v1.0/en/faq/faq/#node-prints-nat-traversal-failed
+
+Now idle idle sometimes 20 minutes or 1 hour
+
+Oh did you start ava in byobu? No? Then the moment you close your ssh connection all is lost und you have to start again with `./ava` and bootstrapping. We will make a process that runs on its own in the end. ;-)
+
+```sh
+INFO [06-05|20:28:56] <chain 11111111111111111111111111111111LpoYY> /snow/engine/common/bootstrapper.go#132: Bootstrapping finished with no accepted frontier. This is likely a result of failing to be able to connect to the specified bootstraps, or no transactions
+```
+
+WHAAAT something failed ? No all good
+
+```sh
+INFO [06-05|20:28:56] <chain abcdefghfwrfgiogjtgojionevinviogoeghgeggebbbebehg> /snow/engine/snowman/transitive.go#47: Initializing Snowman consensus
+...
+INFO [06-05|20:28:56] <chain Hkfgk76fghvertfsQgmfhstTvneduifsdf5hGtuAsCYugdFgg> /snow/engine/avalanche/transitive.go#43: Initializing Avalanche consensus
+...
+INFO [06-05|20:28:56] <chain fgggfgdfgse5u46dfhtjxdHKTODIRsgegdgdfgt5fGERGCHrhg> /snow/engine/snowman/transitive.go#47: Initializing Snowman consensus
+...
+INFO [06-05|20:28:56] <chain amrghfgxct/ikgdrgujpgks5rsdgx325vdgdgKwfhgd5KHAhtM> /snow/engine/snowman/transitive.go#47: Initializing Snowman consensus
+```
+
+Some consensus mechanics were initialized - good
+
+the something about bootstrapping
+
+```sh
+INFO [06-05|20:29:00] <chain 1GHaaPbg1YBR4qiATuFNfL2j9StJwmddwXiwm1s9ts5KXvMai> /snow/engine/avalanche/transitive.go#70: Bootstrapping finished with 0 vertices in the accepted frontier
+...
+INFO [06-05|20:29:00] <chain zJytnh96Pc8rM337bBrtMvJDbEdDNjcXG3WkTNCiLp18ergm9> /snow/engine/snowman/transitive.go#99: Bootstrapping finished with BhdXsMYpJsjGdgk1wqUWcukurCovwv9hpKMuLv7bJ9jVeSZJj as the last accepted block
+```
+
+sometimes 0, sometimes more vertices - all goog
+
+then a lot of this
+
+```sh
+2020-06-05T20:37:05.738Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:05.738] FS scan times                            list=194.72µs   set=2.5µs    diff=2.481µs
+2020-06-05T20:37:08.739Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:08.739] FS scan times                            list=247.83µs   set=4.092µs  diff=14.278µs
+...
+2020-06-05T20:37:32.744Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:32.744] FS scan times                            list=220.201µs  set=2.907µs  diff=2.574µs
+2020-06-05T20:37:35.744Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:35.744] FS scan times                            list=186.441µs  set=2.575µs  diff=2.259µs
+2020-06-05T20:37:36.831Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:36.830] Persisted trie from memory database      nodes=4 size=591.00B time=1.976214ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+2020-06-05T20:37:36.835Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:36.834] Inserted new block                       number=1 hash=2e68fe…9535bf uncles=0 txs=1 gas=21000 elapsed=12.285ms root=95f8a8…2a97db
+...
+2020-06-05T20:37:36.835Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:36.835] Reinjecting stale transactions           count=0
+2020-06-05T20:37:36.849Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:36.848] Persisted trie from memory database      nodes=4 size=623.00B time=1.432925ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+...
+2020-06-05T20:37:59.750Z [DEBUG] plugin.sh: DEBUG[06-05|20:37:59.750] FS scan times                            list=263.478µs  set=4.722µs  diff=4.5µs
+2020-06-05T20:38:02.750Z [DEBUG] plugin.sh: DEBUG[06-05|20:38:02.750] FS scan times                            list=153.109µs  set=2.13µs   diff=2.278µs
+...
+```
+
+### MONITOR
+
+We can monitor stuff now:
+
+byobu new window `F2`, you can have a lot of them
+
+- Temperature  
+  `watch cat /sys/class/thermal/thermal_zone0/temp`
+- DB folder  
+  `cd /home/ubuntu/.gecko/db/denali/v0.5.0`  
+  `watch ls -al`
+- ava process  
+  `ps -aux | grep ava` 
+  row three is %CPU, row four %MEM
 
 
 ## TODOS:
 
 set ubuntu timezone 
-
+run it as a process without ssh needed
