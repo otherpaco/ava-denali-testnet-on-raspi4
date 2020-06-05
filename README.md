@@ -58,6 +58,13 @@ zsh top shell
 ohmyzsh top config for zsh  
 byobu good shell if you use ssh as it runs even when you disconnect
 
+## GECKO
+
+I follow mostly this one  
+https://medium.com/@nitaxmx/ava-testnet-validator-in-raspberry-pi-59bd16b59d64
+
+- sudo apt install golang
+- go version should show go1.13.x or higher
 
 
 
