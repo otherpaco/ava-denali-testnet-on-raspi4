@@ -98,5 +98,35 @@ watch cat /sys/class/thermal/thermal_zone0/temp
 
 refreshes the value every 2 seconds Strg + c exits
 
+## JOINING THE CHALLENGES
 
+https://medium.com/avalabs/how-to-join-avas-denali-test-network-9bbfb353207b
+
+if you can open port 9651 to the RasPi in your router
+
+- cd $GOPATH/src/github.com/ava-labs/gecko/build
+- ./ava
+
+while this is running, keep it running open another window F2 in byobu (F3 and F4 to switch windows, exit to close, F6 to detach byobu you can come back anytime "byobu")
+
+CREATE USER
+
+curl -X POST --data '{
+     "jsonrpc": "2.0",
+     "id": 1,
+     "method": "keystore.createUser",
+     "params": {
+         "username": "user",
+         "password": "password"
+     }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/keystore
+
+response {"jsonrpc":"2.0","result":{"success":true},"id":1}
+
+
+
+
+TODOS:
+
+set ubuntu timezone 
 
