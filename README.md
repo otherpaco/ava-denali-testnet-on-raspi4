@@ -32,7 +32,7 @@ Ubuntu 20.04 LTS 64-bit for RasPi4
 - ssh ubuntu@ubuntu
 - user: ubuntu
 - pw: ubuntu (you will be asked to change that)
-- for securtiy (hardening) use the internet
+- for securtiy (hardening) use the internet, eg ssh key instead of pw and so on
 - wait for ubuntu to self update a bit then
 - sudo apt update
 - sudo apt full-upgrade
@@ -47,3 +47,18 @@ from here https://www.digitalocean.com/community/tutorials/how-to-add-swap-space
 - sudo swapon /swapfile
 - sudo cp /etc/fstab /etc/fstab.bak (just in case)
 - you can work on swapinees etc
+
+add some tools some you don't need but love
+
+- sudo apt install zsh
+- sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+- sudo apt install byobu (should already be there)
+
+zsh top shell  
+ohmyzsh top config for zsh  
+byobu good shell if you use ssh as it runs even when you disconnect
+
+
+
+
+
