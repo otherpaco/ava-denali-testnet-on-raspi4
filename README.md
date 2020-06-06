@@ -105,6 +105,8 @@ gives you the CPU temp, divide it by 1000 and you have degrees Celsius
 
 refreshes the value every 2 seconds `Strg + c` exits
 
+or press `F9` in byobu and configure it to show temperature in the info bar 
+
 ## JOINING THE CHALLENGES
 
 https://medium.com/avalabs/how-to-join-avas-denali-test-network-9bbfb353207b
@@ -213,6 +215,7 @@ byobu new window `F2`, you can have a lot of them
 
 - Temperature  
   `watch cat /sys/class/thermal/thermal_zone0/temp`
+  or byobu status bar (config it with `F9`)
 - DB folder  
   `watch ls -al ~/.gecko/db/denali/v0.5.0/`
 - size of DB folder  
