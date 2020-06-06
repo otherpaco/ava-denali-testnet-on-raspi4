@@ -214,15 +214,92 @@ byobu new window `F2`, you can have a lot of them
 - Temperature  
   `watch cat /sys/class/thermal/thermal_zone0/temp`
 - DB folder  
-  `cd /home/ubuntu/.gecko/db/denali/v0.5.0`  
-  `watch ls -al`
+  `watch ls -al ~/.gecko/db/denali/v0.5.0/`
 - size of DB folder  
   `watch du -hs ~/.gecko/db/denali/v0.5.0/`
 - ava process  
-  `ps -aux | grep ava` 
-  row three is %CPU, row four %MEM
+  `ps -aux | grep ava` or
+  `ps aux | sed -e '1b' -e '/ava/!d'`
 
 In the `~/.gecko` folder lives a lot of "personal" gecko stuff.
+
+## IN THE MEANTIME
+
+### create an address X-Chain
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :2,
+    "method" :"avm.createAddress",
+    "params" :{
+        "username": "YOUR USERNAME",
+        "password": "YOUR PASSWORD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+response is something like this
+
+```sh
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "address": "YOUR X-CHAIN ADDRESS"
+    },
+    "id": 1
+}
+```
+
+**write down your address**
+
+### create an address P-Chain
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.createAccount",
+    "params": {
+        "username": "YOUR USERNAME",
+        "password": "YOUR PASSWORD"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+if you get a 404 just wait, early during bootstrapping it fails see https://docs.ava.network/v1.0/en/faq/faq/#why-am-i-getting-a-404-when-i-make-an-api-call
+
+response
+
+```sh
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "address": "YOUR P-CHAIN ADDRESS"
+    },
+    "id": 1
+}
+```
+
+**write it down**
+
+but you can request it with
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "avm.listAddresses",
+    "params": {
+        "username":"myUsername",
+        "password":"myPassword"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
+
+
+
 
 ## TODOS:
 
