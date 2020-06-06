@@ -300,6 +300,24 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
+## SEND nAVA TO THE PLATFORM P-CHAIN OR STAKE
+
+still using this link https://medium.com/avalabs/how-to-join-avas-denali-test-network-9bbfb353207b
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avm.exportAVA",
+    "params" :{
+        "username": "YOUR USERNAME",
+        "password": "YOUR PASSWORD",
+        "to":"YOUR PLATFORM ADDRESS HERE",
+        "amount": 10000
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+```
+
 
 
 
