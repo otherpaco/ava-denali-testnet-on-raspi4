@@ -318,6 +318,14 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
+Write that txID down, too. The first time noting happened and when I checked the `avm.getTxStatus` it was "Unknown".
+I checke my balance that was still 20.000.
+
+https://docs.ava.network/v1.0/en/api/avm/#avmgettxstatus
+
+https://docs.ava.network/v1.0/en/api/avm/#avmgetbalance
+
+So I sent it a secodn time. Interesting it stays the same txID, this time after one second the status was "Processing".
 
 
 
