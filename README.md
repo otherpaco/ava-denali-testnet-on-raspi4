@@ -325,9 +325,27 @@ https://docs.ava.network/v1.0/en/api/avm/#avmgettxstatus
 
 https://docs.ava.network/v1.0/en/api/avm/#avmgetbalance
 
-So I sent it a secodn time. Interesting it stays the same txID, this time after one second the status was "Processing".
+So I sent it a secodn time. It staid the same txID, this time after one second the status was "Processing".
 
+After a few hours it was "Accepted".
 
+### Accept the tranfer on P-Chain
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.importAVA",
+    "params": {
+        "username": "YOUR USERNAME",
+        "password": "YOUR PASSWORD",
+        "to":"YOUR PLATFORM ADDRESS HERE",
+        "payerNonce":1
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+```
+
+**note** the returned tx value, a long string.
 
 
 ## TODOS:
