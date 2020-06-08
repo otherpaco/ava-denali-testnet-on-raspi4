@@ -347,6 +347,23 @@ curl -X POST --data '{
 
 **note** the returned tx value, a long string.
 
+Took nearly a day but the funds arrived on the P-Chain
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"platform.listAccounts",
+    "params" :{
+        "username": "YOUR USERNAME",
+        "password": "YOUR PASSWORD"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+here you can check your AVA balance in the P-Chain account.
+
+https://docs.ava.network/v1.0/en/api/platform/#platformlistaccounts
 
 ## TODOS:
 
