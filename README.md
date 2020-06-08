@@ -347,7 +347,21 @@ curl -X POST --data '{
 
 **note** the returned tx value, a long string.
 
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.issueTx",
+    "params": {
+        "tx":"THE ISSUE TRANSFER TX HERE"
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+```
+
+Take the resulting transaction and issue it to the P-Chain from the API call "issueTx"
+
 Took nearly a day but the funds arrived on the P-Chain
+Check your AVA balance in the P-Chain account.
 
 ```sh
 curl -X POST --data '{
@@ -361,9 +375,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
-here you can check your AVA balance in the P-Chain account.
 
-https://docs.ava.network/v1.0/en/api/platform/#platformlistaccounts
 
 ## TODOS:
 
