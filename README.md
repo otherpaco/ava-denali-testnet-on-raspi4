@@ -223,6 +223,8 @@ byobu new window `F2`, you can have a lot of them
 - ava process  
   `ps -aux | grep ava` or
   `ps aux | sed -e '1b' -e '/ava/!d'`
+- Memory  
+  `watch free -h`
 
 In the `~/.gecko` folder lives a lot of "personal" gecko stuff.
 
@@ -375,9 +377,129 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
 ```
 
+## BECOME A VALIDATOR
+
+This will give you your nodeID
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "admin.getNodeID",
+    "params":{},
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/admin
+```
+
+Now add your nodeID to the network
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.addDefaultSubnetValidator",
+    "params": {
+        "id":"YOUR NODEID HERE",
+        "payerNonce":2,
+        "destination":"YOUR PLATFORM ADDRESS HERE",
+        "startTime":'$(date --date="15 minutes" +%s)',
+        "endTime":1592265599,
+        "stakeAmount":10000,
+        "delegationFeeRate":0
+    },
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+Platform address is your P-address to where the money returns after staking.
+Time is in Unix timestamp, seconds sice Jan 1st 1970.
+Here is a converter page https://www.unixtimestamp.com/
+You can use a Timestamp for the startTime, too.
+
+You'll get an unsigned transaction as response like this:
+
+```sh
+{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "result" :{
+        "unsignedTx": "1115K3jV5Yxr145wi6kEYpN1nPz3GEBkzG8mpF2s2959VsR54YGenLJrgdg3UEE7vFPNDE5n3Cq9Vs71HEjUUoVSyrt9Z3X7M5sKLCX5WScTcQocxjnXfFowZxFe4uH8iJU7jnCZgeKK5bWsfnWy2b9PbCQMN2uNLvwyKRp4ZxcgRptkuXRMCKHfhbHVKBYmr5e2VbBBht19be57uFUP5yVdMxKnxecs"
+    }
+}
+```
+
+We have to sign it
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.sign",
+    "params": {
+        "username": "YOUR USERNAME HERE",
+        "password": "YOUR PASSWORD HERE",
+        "tx":"THE VALIDATION UNSIGNED TX HERE",
+        "signer":"YOUR PLATFORM ADDRESS HERE"
+    },
+    "id": 2
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+response is like that:
+
+```sh
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "Tx": "111Bit5JNASbJyTLrd2kWkYRoc96swEWoWdmEhuGAFK3rCAyTnTzomuFwgx1SCUdUE71KbtXPnqj93KGr3CeftpPN37kVyqBaAQ5xaDjr7wVBTUYi9iV7kYJnHF61yovViJF74mJJy7WWQKeRMDRTiPuii5gsd11gtNahCCsKbm9seJtk2h1wAPZn9M1eL84CGVPnLUiLP"
+    },
+    "id": 1
+}
+```
+
+last step is to issue it to the P-Chain
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.issueTx",
+    "params": {
+        "tx":"YOUR VALIDATION SIGNED TX HERE"
+    },
+    "id": 3
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+When you call this:
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getPendingValidators",
+    "params": {},
+    "id": 4
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+you should find your nodeID and P-address in the list of pending validators.
+
+or a little later this call:
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getCurrentValidators",
+    "params": {},
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/P
+```
+
+gives you the list of current validators. That is the list you want to be in.
+
+You can check https://explorer.ava.network/ there is a validator searchbar.
+
+If the last steps are not working stop ./ava, restart it and repeat from `platform.addDefaultSubnetValidator` or maybe from the `platform.issueTx` that you did before that call.
+
+Good luck have fun.
+
 
 
 ## TODOS:
-
-set ubuntu timezone 
-run it as a process without ssh needed
+systemd
