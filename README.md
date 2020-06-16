@@ -509,11 +509,33 @@ sudo adduser --gecos ',,,' --disabled-password --home /opt/gecko gecko
 
 Whenever we need this user we get it with `sudo su gecko`. The user itself has no password and can not login.
 
-When you did not start yet, start here and install gecko in this folder `/opt/gecko` otherwise you have to copy a lot of stuff and change the owner etc etc set the $GOPATH and so on. You may want to stick to your installation.  
+When you did not start yet, start here and install gecko in this folder `/opt/gecko` otherwise you have to copy a lot of stuff and set the $GOPATH again and so on. You may want to stick with to your installation.  
 In the end this will be a complete guide and this section will be in the beginning.
 
+For the following steps I will use the user `gecko` with `sudo su gecko`.
 
+I had to repeat the step for `ohMyZsh` and this
 
+```sh
+go get -v -d github.com/ava-labs/gecko/...
+cd $GOPATH/src/github.com/ava-labs/gecko
+./scripts/build.sh
+```
+
+After that I copied the `.gecko` folder with
+
+```sh
+cp -arv /home/ubuntu/.gecko/ ~
+```
+
+Now you should be able as `gecko` to start
+
+```sh
+cd $GOPATH/src/github.com/ava-labs/gecko/build
+./ava
+```
+
+When you are sure everything is working you can clean up your folders in the home folder of the user ubuntu.
 
 ## TODOS:
 systemd
