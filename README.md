@@ -499,6 +499,20 @@ If the last steps are not working stop ./ava, restart it and repeat from `platfo
 
 Good luck have fun.
 
+## Clean Up
+
+Let's create a dedicated user just for gecko
+
+```sh
+sudo adduser --gecos ',,,' --disabled-password --home /opt/gecko gecko
+```
+
+Whenever we need this user we get it with `sudo su gecko`. The user itself has no password and can not login.
+
+When you did not start yet, start here and install gecko in this folder `/opt/gecko` otherwise you have to copy a lot of stuff and change the owner etc etc set the $GOPATH and so on. You may want to stick to your installation.  
+In the end this will be a complete guide and this section will be in the beginning.
+
+
 
 
 ## TODOS:
