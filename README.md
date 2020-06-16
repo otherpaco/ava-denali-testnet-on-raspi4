@@ -537,5 +537,40 @@ cd $GOPATH/src/github.com/ava-labs/gecko/build
 
 When you are sure everything is working you can clean up your folders in the home folder of the user ubuntu.
 
-## TODOS:
-systemd
+## systemd
+
+inspired by this article
+
+https://medium.com/@dogusural/how-to-keep-denali-node-alive-on-linux-c16d57e561ca
+
+check the link for info how to monitor your node. I changed the name of the service to `gecko`. So you have to replace "denali" with "gecko" when you use commands from the article.
+
+```sh
+sudo touch /etc/systemd/system/gecko.service
+```
+
+as sudo enter the following lines to the file with the editor of your choice, e.g. `sudo nano /etc/systemd/system/gecko.service`
+
+```                                                                                                                 
+[Unit]
+Description=gecko AVA node
+After=network-online.target
+Requires=network-online.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=gecko
+SyslogIdentifier=gecko.service
+ExecStart=/opt/gecko/go/src/github.com/ava-labs/gecko/build/ava
+[Install]
+WantedBy=multi-user.target
+```
+
+Start service and enable it so it starts after reboot.
+
+```sh
+sudo systemctl start gecko.service
+sudo systemctl enable gecko.service
+```
